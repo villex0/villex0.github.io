@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Taustaväri*/
         body {
             background-color: #fff2b3;
             font-family: Arial, sans-serif;
@@ -19,6 +20,7 @@
             display: inline;
             margin-right: 20px;
         }
+        /* flexbox säätiedoille*/
         .weather-container {
             display: flex;
             justify-content: space-around;
@@ -32,7 +34,7 @@
 
 <body>
     <nav>
-        <ul>
+        <ul>    <!-- navigaatio tehtäviin -->
             <li><a href="kurssi.html">Tehtävä 1</a></li>
             <li><a href="toteutus.html">Tehtävä 2</a></li>
             <li><a href="tapahtumat.html">Tehtävä 3 - Tapahtumat</a></li>
@@ -43,7 +45,7 @@
     <div class="weather-container" id="vastaus"></div>
 
     <script>
-        // Helsinki
+        // Helsinki säätiedot fetch
         fetch('https://api.openweathermap.org/data/2.5/weather?lat=60.1699&lon=24.9384&appid=0f40ab817e5ad4c4523170746e12e990')
             .then(response => response.json())
             .then(data => {
@@ -58,7 +60,7 @@
             .catch(error => {
                 document.getElementById("vastaus").innerHTML += '<p>Tietoja ei saatu haettua: ' + error + '</p>';
             });
-        // Tampere
+        // Tampere säätiedot fetch
         fetch('https://api.openweathermap.org/data/2.5/weather?lat=61.4978&lon=23.7607&appid=0f40ab817e5ad4c4523170746e12e990')
             .then(response => response.json())
             .then(data => {
