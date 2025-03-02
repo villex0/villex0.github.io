@@ -10,7 +10,7 @@
 
 <body style="background-color: #b3e6b3;">
     <nav>
-        <ul>
+        <ul>    <!-- navigaatio tehtäviin -->
             <li><a href="kurssi.html">Tehtävä 1</a></li>
             <li><a href="toteutus.html">Tehtävä 2</a></li>
             <li><a href="tapahtumat.html">Tehtävä 3 - Tapahtumat</a></li>
@@ -21,6 +21,7 @@
     <div id="vastaus"></div>
 
     <script>
+        // json data import
         fetch('https://api.visittampere.com/api/v1/visittampere/event/published/all/?format=json&lang=fi')
             .then(function (response) {
                 return response.json();
@@ -32,12 +33,12 @@
             .catch(function (error) {
                 document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan </p>" + error;
             });
-
+        // käsitellään tapahtumatiedot
         function tapahtumat(data) {
             var teksti = "<h1>Tampereella tapahtuu</h1>";
 
             for (var i = 0; i < data.length; i++) {
-                // Title, description ja url
+                // Title, kuvaus ja url
                 teksti += "<h3>" + data[i].title + "</h3>";
                 teksti += "<p>" + data[i].description + "</p>";
                 teksti += "<p><a href='" + data[i].url + "' target='_blank'>" + data[i].url + "</a></p>";
