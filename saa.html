@@ -44,7 +44,6 @@
 
     <script>
         // Helsinki
-        // Tampere
         fetch('https://api.openweathermap.org/data/2.5/weather?lat=60.1699&lon=24.9384&appid=0f40ab817e5ad4c4523170746e12e990')
             .then(response => response.json())
             .then(data => {
@@ -59,7 +58,7 @@
             .catch(error => {
                 document.getElementById("vastaus").innerHTML += '<p>Tietoja ei saatu haettua: ' + error + '</p>';
             });
-
+        // Tampere
         fetch('https://api.openweathermap.org/data/2.5/weather?lat=61.4978&lon=23.7607&appid=0f40ab817e5ad4c4523170746e12e990')
             .then(response => response.json())
             .then(data => {
