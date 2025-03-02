@@ -10,7 +10,7 @@
 
 <body style="background-color: #ffcccb;">
     <nav>
-        <ul>
+        <ul>    <!-- navigaatio tehtäviin -->
             <li><a href="kurssi.html">Tehtävä 1</a></li>
             <li><a href="toteutus.html">Tehtävä 2</a></li>
             <li><a href="tapahtumat.html">Tehtävä 3 - Tapahtumat</a></li>
@@ -21,6 +21,7 @@
     <div id="vastaus"></div>
 
     <script>
+        // json data import
         fetch('https://villex0.github.io/toteutus.json')
         .then(function(response) {
             return response.json();
@@ -31,7 +32,7 @@
         .catch(function(error) {
             document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
         });
-
+        // Printataan data sivulle tekstimuodossa
         function kerro(data) {
             var teksti = "";
             teksti += "<h1>" + data.toteutus_nimi + "</h1>";
