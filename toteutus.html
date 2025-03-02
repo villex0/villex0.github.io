@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <title>JSON Osa II</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="background-color: #ffcccb;">
+    <nav>
+        <ul>
+            <li><a href="kurssi.html">JSON OSA I</a></li>
+        </ul>
+    </nav>
+
+    <div id="vastaus"></div>
+
+    <script>
+        fetch('https://villex0.github.io/toteutus.json')
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            kerro(data);
+        })
+        .catch(function(error) {
+            document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
+        });
+
+        function kerro(data) {
+            var teksti = "";
+            teksti += "<h1>" + data.toteutus_nimi + "</h1>";
+            teksti += "<p><b>Osallistujien lukumäärä: </b>" + data.osallistujien_lukumäärä + "</p>";
+            teksti += "<p><b>Osallistujat: </b><br>";
+            
+            data.osallistujat.forEach(function(osallistuja) {
+                teksti += osallistuja.nimi + "<br>";
+            });
+            
+            teksti += "<p><b>Alkamisaika: </b>" + data.alkamis_aika + "</p>";
+            teksti += "<p><b>Loppumisaika: </b>" + data.loppumis_aika + "</p>";
+            teksti += "<p><b>Kesto: </b>" + data.kesto_viikkoina + " viikkoa</p>";
+            teksti += "<img src='" + data.kuva + "' alt='Kuva' style='max-width: 50%; height: auto;'>";
+            
+            document.getElementById("vastaus").innerHTML = teksti;
+        }
+    </script>
+</body>
+
+</html>
