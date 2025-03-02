@@ -1,0 +1,25 @@
+{
+  "toteutus_nimi": "Digitekniikat",
+  "osallistujien_lukumäärä": 5,
+  "osallistujat": [
+    {
+      "nimi": "Perttu Simmonen"
+    },
+    {
+      "nimi": "Kalle Kultanen"
+    },
+    {
+      "nimi": "Laura Lehtinen"
+    },
+    {
+      "nimi": "Saara Saaltonen"
+    },
+    {
+      "nimi": "Simo Hummunen"
+    }
+  ],
+  "alkamis_aika": "2025-01-13",
+  "loppumis_aika": "2025-03-14",
+  "kesto_viikkoina": 8,
+  "kuva": "https://images.pexels.com/photos/1181396/pexels-photo-1181396.jpeg"
+}
