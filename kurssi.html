@@ -9,10 +9,15 @@
 </head>
 
 <body>
+    <nav>
+        <ul>
+            <li><a href="toteutus.html">JSON OSA II</a></li>
+        </ul>
+    </nav>
+
     <div id="vastaus"></div>
 
     <script>
-        // JSON-data import
         fetch('https://villex0.github.io/data.json')
             .then(function (response) {
                 return response.json();
@@ -24,7 +29,6 @@
                 document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
             });
 
-        // kirjoittaa datan sivulle
         function kerro(data) {
             var teksti = "";
 
