@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <title>JSON Osa I</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css"> <!-- Linkitetään tyylitiedosto -->
+</head>
+
+<body>
+    <h1>JSON testi sivu</h1>
+    <div id="vastaus"></div>
+
+    <script>
+        // Haetaan JSON-data
+        fetch('https://villex0.github.io/data.json')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (responseJson) {
+                kerro(responseJson);
+            })
+            .catch(function (error) {
+                document.getElementById("vastaus").innerHTML = "<p>Tietoa ei pystytä hakemaan</p>";
+            });
+
+        // Funktio, joka kirjoittaa haetun datan HTML-sivulle
+        function kerro(data) {
+            var teksti = "";
+
+            teksti = "<h2>" + data.otsikko + "</h2>";
+            teksti = teksti + "<p><b>Kuvaus:</b> " + data.kuvaus + "</p>";
+            teksti = teksti + "<img src='" + data.kuva + "' alt='Kuva' width='300'><br>";
+
+            teksti = teksti + "<h3>Opintojakso:</h3>";
+            teksti = teksti + "<p><b>Nimi:</b> " + data.opintojakso.nimi + "<br>";
+            teksti = teksti + "<b>Tunnus:</b> " + data.opintojakso.tunnus + "<br>";
+            teksti = teksti + "<b>Opintopisteet:</b> " + data.opintojakso.opintopisteet + "</p>";
+
+            teksti = teksti + "<h3>Sisältö:</h3><ul>";
+            data.sisalto.forEach(function (aihe) {
+                teksti = teksti + "<li>" + aihe + "</li>";
+            });
+            teksti = teksti + "</ul>";
+
+            teksti = teksti + "<h3>Tekniikat:</h3><ul>";
+            data.tekniikat.forEach(function (tekniikka) {
+                teksti = teksti + "<li><b>" + tekniikka.aihe + ":</b> <a href='" + tekniikka.linkki + "' target='_blank'>" + tekniikka.linkki + "</a></li>";
+            });
+            teksti = teksti + "</ul>";
+
+            document.getElementById("vastaus").innerHTML = teksti;
+        }
+    </script>
+</body>
+
+</html>
