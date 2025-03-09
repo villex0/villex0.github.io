@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap 5 Website Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="style2.css"> <!-- CSS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+  </style>
+</head>
+<body>
+
+<div class="p-5 text-white text-center custom-background">
+  <h1 id="nasa-title">NASA:n Avaruuskuva Tänään: </h1>
+  <p>Kuva vaihtuu joka päivä 02:00</p>
+</div>
+
+<!--navigaatio bar-->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Etusivu</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#next-update">Seuraava kuva</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-4">
+      <img src="NASA_logo.svg.png" alt="NASA Logo" class="img-fluid">
+      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+      <h3 class="mt-4">Linkkejä</h3>
+      <ul class="nav nav-pills flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" href="https://www.nasa.gov/">NASA kotisivut</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://api.nasa.gov/">NASA API</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+      <hr class="d-sm-none">
+    </div>
+    <div class="col-sm-8">
+      <h5 id="image-title">Loading...</h5>
+      <img id="nasa-image" class="img-fluid" src="" alt="NASA Astronomy Picture of the Day">
+      <p id="image-description">Loading...</p>
+    </div>
+  </div>
+</div>
+
+<div class="mt-5 p-4 bg-dark text-white text-center" id="next-update">
+
+  <!-- Bootstrap alert elementti -->
+  <p id="update-time" class="alert alert-info">Seuraava päivitys: Ladataan...</p>
+</div>
+
+<script>
+     // JSON fetch
+  fetch('https://api.nasa.gov/planetary/apod?api_key=yTlES406tQOMfrhLEN6pplFJ4fZmhwDstTtiiJbK')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('image-title').innerText = "\"" + data.title + "\"";
+      document.getElementById('nasa-image').src = data.url;
+      document.getElementById('image-description').innerText = data.explanation;
+
+      // muutetaan päiväysmuoto dd/mm/yy
+      var dateParts = data.date.split("-"); 
+      var euroDate = dateParts[2] + "." + dateParts[1] + "." + dateParts[0];
+      
+      document.getElementById("nasa-title").innerText = "NASA:n Avaruuskuva Tänään: " + euroDate;
+
+
+      // Lasketaan seuraava päivitys aika (seuraava päivitys klo 02.00)
+      var nextUpdateTime = new Date();
+      nextUpdateTime.setHours(2, 0, 0, 0);
+
+      if (nextUpdateTime < new Date()) {
+        nextUpdateTime.setDate(nextUpdateTime.getDate() + 1);
+      }
+
+      // Aika seuraavaan päivitykseen
+      var timeDiff = nextUpdateTime - new Date();
+      var hours = Math.floor(timeDiff / (1000 * 60 * 60));
+      var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+      // jäljellä oleva aika
+      var nextUpdateString = "Seuraava kuva: " + hours + " tuntia ja " + minutes + " minuuttia.";
+
+      document.getElementById('update-time').innerText = nextUpdateString;
+    })
+
+</script>
+
+</body>
+</html>
